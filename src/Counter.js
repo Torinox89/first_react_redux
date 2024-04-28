@@ -7,7 +7,7 @@ import { decrement, increment, incrementByAmount } from './features/counterSlice
 function Counter() {
     // Call useSelector to grab the current value of our state variable
     // from the store, and assign it to a variable named "count"
-    const count = useSelector((state) => state.value)
+    const count = useSelector((state) => state.counter.value)
     // And include the useDispatch hook...
     const dispatch = useDispatch()
     //Import useState from React and then instantiate a state variable 
@@ -28,19 +28,21 @@ function Counter() {
 // within that form that updates the value of input whenever its value is changed.
     return (
         <div>
-            <h1>
-                {count}
-            </h1>
-            <button onClick={() => dispatch(increment())}>
+            <h1>{count}</h1>
+            <button
+                aria-label="Increment value"
+                onClick={() => dispatch(increment())}>
                 Increment
             </button>
-            <button onClick={() => dispatch(decrement())}>
+            <button
+                aria-label="Decrement value"
+                onClick={() => dispatch(decrement())}>
                 Decrement
             </button>
-            <form onSubmit={(e) => byAmountSubmit(e)}>
-            <input type="number" onChange={(e) => setInput(e.target.value)} />
-            <button type="submit">Submit</button>
-        </form>
+            <form onSubmit={(e) => incrementByAmount(e)}>
+                <input type="number" onChange={(e) => setInput(e.target.value)} />
+                <button type="submit">Submit</button>
+            </form>
         </div>
     )
 }
